@@ -1,5 +1,5 @@
 hash: f22cce9d28ba0ca886bd53870819a5b6b0974bb792c139a372545fd1e01210a0
-updated: 2017-02-22T18:32:23.380093527-06:00
+updated: 2017-02-22T18:40:41.186116082-06:00
 imports:
 - name: github.com/aws/aws-sdk-go
   version: 00fb2125993965df739fa3398b03bef3eb2e198f
@@ -68,13 +68,13 @@ imports:
 - name: github.com/pkg/errors
   version: 645ef00459ed84a119197bfb8d8205042c6df63d
 - name: github.com/rai-project/config
-  version: 6c3f625b8d8fe37eb9f082600745bcd9c64a80ee
+  version: 66123b20ae4b09443e59022a828088f434d5c130
 - name: github.com/rai-project/godotenv
   version: 726cc8b906e3d31c70a9671c90a13716a8d3f50d
 - name: github.com/rai-project/logger
-  version: 603c4893a5f11e787f6e9ee1b8f59cbc45a4a631
+  version: 6ae7860f311ccf6799a59c945e7244e68f244ce0
 - name: github.com/rai-project/vipertags
-  version: 997637b503048b1f8d2a1126ff497db620632608
+  version: c4cab707247985d21c72ba3342a25440949e02bf
 - name: github.com/Sirupsen/logrus
   version: c078b1e43f58d563c74cebe63c85789e76ddb627
   subpackages:
