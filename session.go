@@ -7,10 +7,38 @@ import (
 	"github.com/pkg/errors"
 )
 
-func NewSession() (*session.Session, error) {
+type SessionOptions struct {
+	AccessKey string
+	SecretKey string
+}
+
+type SessionOption func(*SessionOptions)
+
+func AccessKey(s string) SessionOption {
+	return func(opt *SessionOptions) {
+		opt.AccessKey = s
+	}
+}
+
+func SecretKey(s string) SessionOption {
+	return func(opt *SessionOptions) {
+		opt.SecretKey = s
+	}
+}
+
+func NewSession(opts ...SessionOption) (*session.Session, error) {
+	options := SessionOptions{
+		AccessKey: Config.AccessKey,
+		SecretKey: Config.SecretKey,
+	}
+
+	for _, o := range opts {
+		o(&options)
+	}
+
 	cred := credentials.NewStaticCredentials(
-		Config.AccessKey,
-		Config.SecretKey,
+		options.AccessKey,
+		options.SecretKey,
 		"",
 	)
 
