@@ -1,5 +1,5 @@
 {
-    "memo": "577f8aa4b24f2fabe6456eae095a482131147b02987710c832ac066b3dc96f6a",
+    "memo": "ce40d46e773f38ba767eb1db8a1b67ad885297a4d9d1831c7b21d9db1024720c",
     "projects": [
         {
             "name": "github.com/GeertJohan/go-sourcepath",
@@ -12,7 +12,7 @@
         {
             "name": "github.com/Sirupsen/logrus",
             "branch": "master",
-            "revision": "3f603f494d61c73457fb234161d8982b9f0f0b71",
+            "revision": "0208149b40d863d2c1a2f8fe5753096a9cf2cc8b",
             "packages": [
                 ".",
                 "hooks/syslog"
@@ -21,7 +21,7 @@
         {
             "name": "github.com/Unknwon/com",
             "branch": "master",
-            "revision": "28b053d5a2923b87ce8c5a08f3af779894a72758",
+            "revision": "0db4a625e949e956314d7d1adea9bf82384cc10c",
             "packages": [
                 "."
             ]
@@ -29,12 +29,30 @@
         {
             "name": "github.com/aws/aws-sdk-go",
             "branch": "master",
-            "revision": "4590e9b51cd6698144a025a75608fa7a90752d5d",
+            "revision": "78568b07950e5e7948496878fe99b9436add41d4",
             "packages": [
                 "aws",
+                "aws/awserr",
+                "aws/awsutil",
+                "aws/client",
+                "aws/client/metadata",
+                "aws/corehandlers",
                 "aws/credentials",
+                "aws/credentials/ec2rolecreds",
+                "aws/credentials/endpointcreds",
+                "aws/credentials/stscreds",
+                "aws/defaults",
+                "aws/ec2metadata",
+                "aws/endpoints",
+                "aws/request",
                 "aws/session",
-                "service/kinesis"
+                "aws/signer/v4",
+                "private/protocol",
+                "private/protocol/query",
+                "private/protocol/query/queryutil",
+                "private/protocol/rest",
+                "private/protocol/xml/xmlutil",
+                "service/sts"
             ]
         },
         {
@@ -46,17 +64,9 @@
             ]
         },
         {
-            "name": "github.com/evalphobia/logrus_kinesis",
-            "branch": "master",
-            "revision": "3a9524d4e5540cc81c920ee17bd8ad1d47437f5d",
-            "packages": [
-                "."
-            ]
-        },
-        {
             "name": "github.com/fatih/color",
             "branch": "master",
-            "revision": "bf82308e8c8546dc2b945157173eb8a959ae9505",
+            "revision": "7824417a424b65227be8ac9b14d545a7f3e6c3f0",
             "packages": [
                 "."
             ]
@@ -64,7 +74,7 @@
         {
             "name": "github.com/fatih/structs",
             "branch": "master",
-            "revision": "dc3312cb1a4513a366c4c9e622ad55c32df12ed3",
+            "revision": "a720dfa8df582c51dee1b36feabb906bde1588bd",
             "packages": [
                 "."
             ]
@@ -79,8 +89,8 @@
         },
         {
             "name": "github.com/go-ini/ini",
-            "version": "v1.24.0",
-            "revision": "e3c2d47c61e5333f9aa2974695dd94396eb69c75",
+            "version": "v1.25.2",
+            "revision": "74bdc99692c3408cb103221e38675ce8fda0a718",
             "packages": [
                 "."
             ]
@@ -90,7 +100,15 @@
             "branch": "master",
             "revision": "372e8ddaa16fd67e371e9323807d056b799360af",
             "packages": [
-                "."
+                ".",
+                "hcl/ast",
+                "hcl/parser",
+                "hcl/scanner",
+                "hcl/strconv",
+                "hcl/token",
+                "json/parser",
+                "json/scanner",
+                "json/token"
             ]
         },
         {
@@ -104,7 +122,7 @@
         {
             "name": "github.com/k0kubun/pp",
             "branch": "master",
-            "revision": "f5dce6ed0ccf6c350f1679964ff6b61f3d6d2033",
+            "revision": "d1532fc5d94ecdf2da29e24d7b99721f3287de4a",
             "packages": [
                 "."
             ]
@@ -120,7 +138,7 @@
         {
             "name": "github.com/mattn/go-colorable",
             "branch": "master",
-            "revision": "d228849504861217f796da67fae4f6e347643f15",
+            "revision": "d898aa9fb31c91f35dd28ca75db377eff023c076",
             "packages": [
                 "."
             ]
@@ -128,7 +146,7 @@
         {
             "name": "github.com/mattn/go-isatty",
             "branch": "master",
-            "revision": "30a891c33c7cde7b02a981314b4228ec99380cca",
+            "revision": "dda3de49cbfcec471bd7a70e6cc01fcc3ff90109",
             "packages": [
                 "."
             ]
@@ -160,7 +178,7 @@
         {
             "name": "github.com/pelletier/go-toml",
             "branch": "master",
-            "revision": "d1fa2118c12c44e4f5004da216d1efad10cb4924",
+            "revision": "22139eb5469018e7374b3e7ef653de37ffb44f72",
             "packages": [
                 "."
             ]
@@ -184,7 +202,7 @@
         {
             "name": "github.com/rai-project/config",
             "branch": "master",
-            "revision": "f52ed1ceef260d86c450ac8699a4fb48b8be1ec7",
+            "revision": "424df0fa1a84f46fb8bceaa35aee107264c312d7",
             "packages": [
                 "."
             ]
@@ -192,7 +210,7 @@
         {
             "name": "github.com/rai-project/godotenv",
             "branch": "master",
-            "revision": "49a98d71a654e5f90239723ae80518a1e234bdd5",
+            "revision": "fc0d48a0f2677e776978720e024b97e74ccc7787",
             "packages": [
                 "."
             ]
@@ -200,7 +218,7 @@
         {
             "name": "github.com/rai-project/logger",
             "branch": "master",
-            "revision": "c2cee355c0b630c5f6c2c169bdf541b32c9f8b06",
+            "revision": "f3550ed1766e0e411de5fe268f75d438c420a3c2",
             "packages": [
                 "."
             ]
@@ -208,7 +226,7 @@
         {
             "name": "github.com/rai-project/vipertags",
             "branch": "master",
-            "revision": "4c19aeb860712d64f43acda5c25fd8d83b940a02",
+            "revision": "f04deba4d94d299a67c81c57d938d0e30a301cbe",
             "packages": [
                 "."
             ]
@@ -218,7 +236,8 @@
             "branch": "master",
             "revision": "72b31426848c6ef12a7a8e216708cb0d1530f074",
             "packages": [
-                "."
+                ".",
+                "mem"
             ]
         },
         {
@@ -259,13 +278,14 @@
             "revision": "69483b4bd14f5845b5a1e55bca19e954e827f1d0",
             "packages": [
                 "assert",
+                "require",
                 "suite"
             ]
         },
         {
             "name": "golang.org/x/sys",
             "branch": "master",
-            "revision": "7a6e5648d140666db5d920909e082ca00a87ba2c",
+            "revision": "075e574b89e4c2d22f2286a7e2b919519c6f3547",
             "packages": [
                 "unix"
             ]
@@ -273,9 +293,13 @@
         {
             "name": "golang.org/x/text",
             "branch": "master",
-            "revision": "06d6eba81293389cafdff7fca90d75592194b2d9",
+            "revision": "85c29909967d7f171f821e7a42e7b7af76fb9598",
             "packages": [
+                "internal/gen",
+                "internal/triegen",
+                "internal/ucd",
                 "transform",
+                "unicode/cldr",
                 "unicode/norm"
             ]
         },
