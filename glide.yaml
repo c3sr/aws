@@ -8,6 +8,7 @@ import:
   - aws
   - aws/credentials
   - aws/session
+  - service/sts
 - package: github.com/k0kubun/pp
   version: ~2.3.0
 - package: github.com/pkg/errors
