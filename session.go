@@ -8,8 +8,10 @@ import (
 )
 
 type SessionOptions struct {
-	AccessKey string
-	SecretKey string
+	AccessKey    string
+	SecretKey    string
+	SessionToken string
+	Region       string
 }
 
 type SessionOption func(*SessionOptions)
@@ -26,10 +28,26 @@ func SecretKey(s string) SessionOption {
 	}
 }
 
+func Region(s string) SessionOption {
+	return func(opt *SessionOptions) {
+		opt.Region = s
+	}
+}
+
+func Sts(account, role string) SessionOption {
+	return func(opt *SessionOptions) {
+		err := usingSTS(opt, account, role)
+		if err != nil {
+			log.WithError(err).Error("Failed to set sts credentials")
+		}
+	}
+}
+
 func NewSession(opts ...SessionOption) (*session.Session, error) {
 	options := SessionOptions{
 		AccessKey: Config.AccessKey,
 		SecretKey: Config.SecretKey,
+		Region:    Config.Region,
 	}
 
 	for _, o := range opts {
@@ -39,12 +57,12 @@ func NewSession(opts ...SessionOption) (*session.Session, error) {
 	cred := credentials.NewStaticCredentials(
 		options.AccessKey,
 		options.SecretKey,
-		"",
+		options.SessionToken,
 	)
 
 	awsconf := &aws.Config{
 		Credentials:      cred,
-		Region:           aws.String(Config.Region),
+		Region:           aws.String(options.Region),
 		DisableSSL:       aws.Bool(true),
 		S3ForcePathStyle: aws.Bool(true),
 		Logger:           log,

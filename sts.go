@@ -5,22 +5,35 @@ import (
 	"os"
 
 	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/sts"
+	"github.com/rai-project/config"
 )
 
-func usingSTS(account, role string) error {
-	sess := session.New(
-		&aws.Config{
-			Region: aws.String(Config.Region),
-		},
-	)
+func usingSTS(opts *SessionOptions, account, role string) error {
+	conf := &aws.Config{
+		Region: aws.String(opts.Region),
+	}
+	if config.IsVerbose {
+		conf = conf.WithCredentialsChainVerboseErrors(true)
+	}
 
-	svc := sts.New(sess)
+	conf = conf.WithCredentials(credentials.NewChainCredentials([]credentials.Provider{
+		&credentials.StaticProvider{Value: credentials.Value{
+			AccessKeyID:     opts.AccessKey,
+			SecretAccessKey: opts.SecretKey,
+		}},
+	}))
 
+	sess := session.New(conf)
+
+	svc := sts.New(sess, conf)
+
+	rolearn := fmt.Sprintf("arn:aws:iam::%s:role/%s", account, role)
 	output, err := svc.AssumeRole(&sts.AssumeRoleInput{
-		RoleArn:         aws.String(fmt.Sprintf("arn:aws:iam::%s:role/%s", account, role)),
-		RoleSessionName: aws.String("temp"),
+		RoleArn:         aws.String(rolearn),
+		RoleSessionName: aws.String("test"),
 	})
 	if err != nil {
 		log.Errorf("Unable to assume role: %v", err.Error())
@@ -35,9 +48,9 @@ func usingSTS(account, role string) error {
 	os.Setenv("AWS_SECRET_ACCESS_KEY", secretKey)
 	os.Setenv("AWS_SESSION_TOKEN", sessionToken)
 
-	Config.AccessKey = accessKey
-	Config.SecretKey = secretKey
-	Config.SessionToken = sessionToken
+	opts.AccessKey = accessKey
+	opts.SecretKey = secretKey
+	opts.SessionToken = sessionToken
 
 	return nil
 }
