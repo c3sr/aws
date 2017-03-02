@@ -5,6 +5,8 @@ import (
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/pkg/errors"
+	"github.com/rai-project/config"
+	"github.com/rai-project/utils"
 )
 
 type SessionOptions struct {
@@ -22,9 +24,31 @@ func AccessKey(s string) SessionOption {
 	}
 }
 
+func EncryptedAccessKey(s string) SessionOption {
+	return func(opt *SessionOptions) {
+		c, err := utils.Decrypt([]byte(config.App.Secret), []byte(s))
+		if err != nil {
+			log.WithError(err).Error("unable to set encrypted access key")
+			return
+		}
+		opt.AccessKey = string(c)
+	}
+}
+
 func SecretKey(s string) SessionOption {
 	return func(opt *SessionOptions) {
 		opt.SecretKey = s
+	}
+}
+
+func EncryptedSecretKey(s string) SessionOption {
+	return func(opt *SessionOptions) {
+		c, err := utils.Decrypt([]byte(config.App.Secret), []byte(s))
+		if err != nil {
+			log.WithError(err).Error("unable to set encrypted access key")
+			return
+		}
+		opt.SecretKey = string(c)
 	}
 }
 
