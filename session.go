@@ -30,7 +30,7 @@ func EncryptedAccessKey(s string) SessionOption {
 	return func(opt *SessionOptions) {
 		key := []byte(config.App.Secret)
 		sec := []byte(s)
-		if p, err := base64.StdEncoding.DecodeString(s); err != nil {
+		if p, err := base64.StdEncoding.DecodeString(s); err == nil {
 			sec = p
 		}
 		c, err := utils.Decrypt(key, sec)
@@ -52,7 +52,7 @@ func EncryptedSecretKey(s string) SessionOption {
 	return func(opt *SessionOptions) {
 		key := []byte(config.App.Secret)
 		sec := []byte(s)
-		if p, err := base64.StdEncoding.DecodeString(s); err != nil {
+		if p, err := base64.StdEncoding.DecodeString(s); err == nil {
 			sec = p
 		}
 		c, err := utils.Decrypt(key, sec)
