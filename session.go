@@ -1,6 +1,8 @@
 package aws
 
 import (
+	"encoding/base64"
+
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -26,7 +28,12 @@ func AccessKey(s string) SessionOption {
 
 func EncryptedAccessKey(s string) SessionOption {
 	return func(opt *SessionOptions) {
-		c, err := utils.Decrypt([]byte(config.App.Secret), []byte(s))
+		key := []byte(config.App.Secret)
+		sec := []byte(s)
+		if p, err := base64.StdEncoding.DecodeString(s); err != nil {
+			sec = p
+		}
+		c, err := utils.Decrypt(key, sec)
 		if err != nil {
 			log.WithError(err).Error("unable to set encrypted access key")
 			return
@@ -43,9 +50,14 @@ func SecretKey(s string) SessionOption {
 
 func EncryptedSecretKey(s string) SessionOption {
 	return func(opt *SessionOptions) {
-		c, err := utils.Decrypt([]byte(config.App.Secret), []byte(s))
+		key := []byte(config.App.Secret)
+		sec := []byte(s)
+		if p, err := base64.StdEncoding.DecodeString(s); err != nil {
+			sec = p
+		}
+		c, err := utils.Decrypt(key, sec)
 		if err != nil {
-			log.WithError(err).Error("unable to set encrypted access key")
+			log.WithError(err).Error("unable to set encrypted secret key")
 			return
 		}
 		opt.SecretKey = string(c)
