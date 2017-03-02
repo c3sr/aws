@@ -34,8 +34,14 @@ func Region(s string) SessionOption {
 	}
 }
 
-func Sts(account, role string) SessionOption {
+func Sts(data ...string) SessionOption {
 	return func(opt *SessionOptions) {
+		account := Config.STSAccount
+		role := Config.STSRole
+		if len(data) >= 2 {
+			account = data[0]
+			role = data[1]
+		}
 		err := usingSTS(opt, account, role)
 		if err != nil {
 			log.WithError(err).Error("Failed to set sts credentials")

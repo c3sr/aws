@@ -26,7 +26,7 @@ func usingSTS(opts *SessionOptions, account, role string) error {
 		}},
 	}))
 
-	sess := session.New(conf)
+	sess := session.New()
 
 	svc := sts.New(sess, conf)
 

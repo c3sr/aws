@@ -19,6 +19,8 @@ type awsConfig struct {
 	SecretKey    string `json:"secret_key" config:"aws.secret_access_key" env:"AWS_SECRET_ACCESS_KEY"`
 	SessionToken string `json:"session_token" config:"-" env:"AWS_SESSION_TOKEN"`
 	Region       string `json:"region" config:"aws.region" default:"us-east-1" env:"AWS_REGION"`
+	STSAccount   string `json:"sts_account" config:"aws.sts_account"`
+	STSRole      string `json:"sts_role" config:"aws.sts_role"`
 }
 
 var (

@@ -19,6 +19,7 @@ func NewSessionTestSuite() *SessionTestSuite {
 func (suite *SessionTestSuite) TestSts() {
 	session, err := NewSession(
 		Region(AWSRegionUSEast1),
+		Sts(),
 	)
 	assert.NoError(suite.T(), err, "must be able to connect")
 	assert.NotNil(suite.T(), session, "sesion must not be nil")
