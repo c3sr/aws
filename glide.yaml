@@ -15,6 +15,7 @@ import:
   version: ~0.8.0
 - package: github.com/rai-project/config
 - package: github.com/rai-project/logger
+- package: github.com/rai-project/utils
 - package: github.com/rai-project/vipertags
 testImport:
 - package: github.com/stretchr/testify

@@ -1,5 +1,5 @@
 {
-    "memo": "061849ca56ef50fa480ab60688b3200aaddf868c864c6b3147e2f2419741bb03",
+    "memo": "7e6c5dc3deb06ced3d8d93668703ac28b2714ed41b86f25201d3cca49dd9ca9b",
     "projects": [
         {
             "name": "github.com/GeertJohan/go-sourcepath",
@@ -58,7 +58,7 @@
         {
             "name": "github.com/davecgh/go-spew",
             "version": "v1.1.0",
-            "revision": "a7a0063072ed89d04285d3d3362aa590ed9f7878",
+            "revision": "346938d642f2ec3594ed81d874461961cd0faa76",
             "packages": [
                 "spew"
             ]
@@ -202,7 +202,7 @@
         {
             "name": "github.com/rai-project/config",
             "branch": "master",
-            "revision": "424df0fa1a84f46fb8bceaa35aee107264c312d7",
+            "revision": "89e25e39258e3ce3660488e913fcc5c3c52095d4",
             "packages": [
                 "."
             ]
@@ -210,7 +210,7 @@
         {
             "name": "github.com/rai-project/godotenv",
             "branch": "master",
-            "revision": "fc0d48a0f2677e776978720e024b97e74ccc7787",
+            "revision": "4eea5d4863542334d540a85cbd0ce558ca30d90c",
             "packages": [
                 "."
             ]
@@ -218,7 +218,15 @@
         {
             "name": "github.com/rai-project/logger",
             "branch": "master",
-            "revision": "f3550ed1766e0e411de5fe268f75d438c420a3c2",
+            "revision": "c503a9575b4139beecc26a0fc3038594bdfb63e8",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/rai-project/utils",
+            "branch": "master",
+            "revision": "922749d8ae305e9a29f8384a211878890b9cdb9a",
             "packages": [
                 "."
             ]
@@ -226,7 +234,7 @@
         {
             "name": "github.com/rai-project/vipertags",
             "branch": "master",
-            "revision": "f04deba4d94d299a67c81c57d938d0e30a301cbe",
+            "revision": "918eb5088d4a3abf31fb6aac339fd1196ceee2a9",
             "packages": [
                 "."
             ]

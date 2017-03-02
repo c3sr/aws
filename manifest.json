@@ -18,6 +18,9 @@
         "github.com/rai-project/logger": {
             "branch": "master"
         },
+        "github.com/rai-project/utils": {
+            "branch": "master"
+        },
         "github.com/rai-project/vipertags": {
             "branch": "master"
         }
