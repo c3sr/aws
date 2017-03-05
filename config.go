@@ -15,13 +15,14 @@ const (
 
 // AWS holds common AWS credentials and keys.
 type awsConfig struct {
-	AccessKey    string `json:"access_key" config:"aws.access_key_id" env:"AWS_ACCESS_KEY_ID"`
-	SecretKey    string `json:"secret_key" config:"aws.secret_access_key" env:"AWS_SECRET_ACCESS_KEY"`
-	SessionToken string `json:"session_token" config:"-" env:"AWS_SESSION_TOKEN"`
-	Region       string `json:"region" config:"aws.region" default:"us-east-1" env:"AWS_REGION"`
-	STSAccount   string `json:"sts_account" config:"aws.sts_account"`
-	STSRole      string `json:"sts_role" config:"aws.sts_role"`
-	EndPoint     string `json:"endpoint" config:"aws.endpoint"`
+	AccessKey              string `json:"access_key" config:"aws.access_key_id" env:"AWS_ACCESS_KEY_ID"`
+	SecretKey              string `json:"secret_key" config:"aws.secret_access_key" env:"AWS_SECRET_ACCESS_KEY"`
+	SessionToken           string `json:"session_token" config:"-" env:"AWS_SESSION_TOKEN"`
+	Region                 string `json:"region" config:"aws.region" default:"us-east-1" env:"AWS_REGION"`
+	STSAccount             string `json:"sts_account" config:"aws.sts_account"`
+	STSRole                string `json:"sts_role" config:"aws.sts_role"`
+	STSRoleDurationSeconds int64  `json:"sts_role_duration_seconds" config:"aws.sts_role_duration_seconds" default:"7200"` // default is 2 hours
+	EndPoint               string `json:"endpoint" config:"aws.endpoint"`
 }
 
 var (
