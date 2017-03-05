@@ -21,6 +21,7 @@ type awsConfig struct {
 	Region       string `json:"region" config:"aws.region" default:"us-east-1" env:"AWS_REGION"`
 	STSAccount   string `json:"sts_account" config:"aws.sts_account"`
 	STSRole      string `json:"sts_role" config:"aws.sts_role"`
+	EndPoint     string `json:"endpoint" config:"aws.endpoint"`
 }
 
 var (
