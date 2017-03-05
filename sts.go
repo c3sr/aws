@@ -11,7 +11,7 @@ import (
 	"github.com/rai-project/config"
 )
 
-func usingSTS(opts *SessionOptions, account, role string) error {
+func usingSTS(opts *SessionOptions, roleSessionName, account, role string) error {
 	conf := &aws.Config{
 		Region: aws.String(opts.Region),
 	}
@@ -33,7 +33,7 @@ func usingSTS(opts *SessionOptions, account, role string) error {
 	rolearn := fmt.Sprintf("arn:aws:iam::%s:role/%s", account, role)
 	output, err := svc.AssumeRole(&sts.AssumeRoleInput{
 		RoleArn:         aws.String(rolearn),
-		RoleSessionName: aws.String("test"),
+		RoleSessionName: aws.String(roleSessionName),
 	})
 	if err != nil {
 		log.Errorf("Unable to assume role: %v", err.Error())

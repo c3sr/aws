@@ -9,6 +9,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/rai-project/config"
 	"github.com/rai-project/utils"
+	"github.com/rai-project/uuid"
 )
 
 type SessionOptions struct {
@@ -79,13 +80,17 @@ func EndPoint(s string) SessionOption {
 
 func Sts(data ...string) SessionOption {
 	return func(opt *SessionOptions) {
+		roleSessionName := uuid.NewV4()
 		account := Config.STSAccount
 		role := Config.STSRole
-		if len(data) >= 2 {
-			account = data[0]
-			role = data[1]
+		if len(data) >= 1 {
+			roleSessionName = data[0]
 		}
-		err := usingSTS(opt, account, role)
+		if len(data) >= 3 {
+			account = data[1]
+			role = data[2]
+		}
+		err := usingSTS(opt, roleSessionName, account, role)
 		if err != nil {
 			log.WithError(err).Error("Failed to set sts credentials")
 		}
