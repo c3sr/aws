@@ -22,7 +22,6 @@ type awsConfig struct {
 	STSAccount             string `json:"sts_account" config:"aws.sts_account"`
 	STSRole                string `json:"sts_role" config:"aws.sts_role"`
 	STSRoleDurationSeconds int64  `json:"sts_role_duration_seconds" config:"aws.sts_role_duration_seconds" default:"3600"` // default is 1 hour
-	EndPoint               string `json:"endpoint" config:"aws.endpoint"`
 }
 
 var (

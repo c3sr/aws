@@ -17,7 +17,6 @@ type SessionOptions struct {
 	SecretKey    string
 	SessionToken string
 	Region       string
-	EndPoint     string
 }
 
 type SessionOption func(*SessionOptions)
@@ -72,12 +71,6 @@ func Region(s string) SessionOption {
 	}
 }
 
-func EndPoint(s string) SessionOption {
-	return func(opt *SessionOptions) {
-		opt.EndPoint = s
-	}
-}
-
 func Sts(data ...string) SessionOption {
 	return func(opt *SessionOptions) {
 		roleSessionName := uuid.NewV4()
@@ -102,7 +95,6 @@ func NewSession(opts ...SessionOption) (*session.Session, error) {
 		AccessKey: Config.AccessKey,
 		SecretKey: Config.SecretKey,
 		Region:    Config.Region,
-		EndPoint:  Config.EndPoint,
 	}
 
 	for _, o := range opts {
@@ -121,7 +113,6 @@ func NewSession(opts ...SessionOption) (*session.Session, error) {
 		DisableSSL:       aws.Bool(true),
 		S3ForcePathStyle: aws.Bool(true),
 		Logger:           log,
-		Endpoint:         aws.String(options.EndPoint),
 	}
 
 	sess, err := session.NewSession(awsconf)
