@@ -8,10 +8,9 @@ import (
 )
 
 func TestMain(m *testing.M) {
-	os.Setenv("DEBUG", "TRUE")
-	os.Setenv("VERBOSE", "TRUE")
-	config.Init()
-	config.IsVerbose = true
-	config.IsDebug = true
+	config.Init(
+		config.VerboseMode(true),
+		config.DebugMode(true),
+	)
 	os.Exit(m.Run())
 }
