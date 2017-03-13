@@ -34,7 +34,7 @@ func usingSTS(opts *SessionOptions, roleSessionName, account, role string) error
 	output, err := svc.AssumeRole(&sts.AssumeRoleInput{
 		RoleArn:         aws.String(rolearn),
 		RoleSessionName: aws.String(roleSessionName),
-		DurationSeconds: aws.Int64(Config.STSRoleDurationSeconds),
+		DurationSeconds: aws.Int64(int64(opts.stsRoleDurationSeconds.Seconds())),
 	})
 	if err != nil {
 		log.Errorf("Unable to assume role: %v", err.Error())

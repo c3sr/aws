@@ -1,6 +1,8 @@
 package aws
 
 import (
+	"time"
+
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -11,51 +13,51 @@ import (
 )
 
 type SessionOptions struct {
-	AccessKey    string
-	SecretKey    string
-	SessionToken string
-	Region       string
+	AccessKey              string
+	SecretKey              string
+	SessionToken           string
+	Region                 string
+	stsRoleDurationSeconds time.Duration
 }
 
 type SessionOption func(*SessionOptions)
 
 func AccessKey(s string) SessionOption {
 	return func(opt *SessionOptions) {
+		if utils.IsEncryptedString(s) {
+			c, err := utils.DecryptStringBase64(config.App.Secret, s)
+			if err == nil {
+				opt.AccessKey = c
+				return
+			}
+			log.WithError(err).Error("unable to set encrypted access key")
+		}
 		opt.AccessKey = s
 	}
 }
-
-func EncryptedAccessKey(s string) SessionOption {
-	return func(opt *SessionOptions) {
-		c, err := utils.DecryptStringBase64(config.App.Secret, s)
-		if err != nil {
-			log.WithError(err).Error("unable to set encrypted access key")
-			return
-		}
-		opt.AccessKey = c
-	}
-}
-
 func SecretKey(s string) SessionOption {
 	return func(opt *SessionOptions) {
-		opt.SecretKey = s
-	}
-}
-
-func EncryptedSecretKey(s string) SessionOption {
-	return func(opt *SessionOptions) {
-		c, err := utils.DecryptStringBase64(config.App.Secret, s)
-		if err != nil {
+		if utils.IsEncryptedString(s) {
+			c, err := utils.DecryptStringBase64(config.App.Secret, s)
+			if err == nil {
+				opt.SecretKey = c
+				return
+			}
 			log.WithError(err).Error("unable to set encrypted secret key")
-			return
 		}
-		opt.SecretKey = c
+		opt.SecretKey = s
 	}
 }
 
 func Region(s string) SessionOption {
 	return func(opt *SessionOptions) {
 		opt.Region = s
+	}
+}
+
+func STSRoleDurationSeconds(t time.Duration) SessionOption {
+	return func(opt *SessionOptions) {
+		opt.stsRoleDurationSeconds = t
 	}
 }
 
@@ -80,9 +82,10 @@ func Sts(data ...string) SessionOption {
 
 func NewSession(opts ...SessionOption) (*session.Session, error) {
 	options := SessionOptions{
-		AccessKey: Config.AccessKey,
-		SecretKey: Config.SecretKey,
-		Region:    Config.Region,
+		AccessKey:              Config.AccessKey,
+		SecretKey:              Config.SecretKey,
+		Region:                 Config.Region,
+		stsRoleDurationSeconds: Config.STSRoleDurationSeconds,
 	}
 
 	for _, o := range opts {
