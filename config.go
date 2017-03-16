@@ -23,7 +23,7 @@ type awsConfig struct {
 	Region                 string        `json:"region" config:"aws.region" default:"us-east-1" env:"AWS_REGION"`
 	STSAccount             string        `json:"sts_account" config:"aws.sts_account"`
 	STSRole                string        `json:"sts_role" config:"aws.sts_role"`
-	STSRoleDurationSeconds time.Duration `json:"sts_role_duration_seconds" config:"aws.sts_role_duration_seconds" default:"3600"` // default is 1 hour
+	STSRoleDurationSeconds time.Duration `json:"sts_role_duration_seconds" config:"aws.sts_role_duration_seconds" default:"30m"` // default is 1 hour
 }
 
 var (
