@@ -24,21 +24,29 @@ type awsConfig struct {
 	STSAccount             string        `json:"sts_account" config:"aws.sts_account"`
 	STSRole                string        `json:"sts_role" config:"aws.sts_role"`
 	STSRoleDurationSeconds time.Duration `json:"sts_role_duration_seconds" config:"aws.sts_role_duration_seconds" default:"30m"` // default is 1 hour
+	done                   chan struct{} `json:"-" config:"-"`
 }
 
 var (
-	Config = &awsConfig{}
+	Config = &awsConfig{
+		done: make(chan struct{}),
+	}
 )
 
 func (awsConfig) ConfigName() string {
 	return "AWS"
 }
 
-func (awsConfig) SetDefaults() {
+func (a *awsConfig) SetDefaults() {
+	vipertags.SetDefaults(a)
 }
 
 func (a *awsConfig) Read() {
 	vipertags.Fill(a)
+}
+
+func (c awsConfig) Wait() {
+	<-c.done
 }
 
 func (c awsConfig) String() string {
