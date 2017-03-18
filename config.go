@@ -42,6 +42,7 @@ func (a *awsConfig) SetDefaults() {
 }
 
 func (a *awsConfig) Read() {
+	defer close(a.done)
 	vipertags.Fill(a)
 }
 
