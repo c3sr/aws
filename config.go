@@ -44,6 +44,9 @@ func (a *awsConfig) SetDefaults() {
 func (a *awsConfig) Read() {
 	defer close(a.done)
 	vipertags.Fill(a)
+	a.AccessKey = decrypt(a.AccessKey)
+	a.SecretKey = decrypt(a.SecretKey)
+	a.SessionToken = decrypt(a.SessionToken)
 }
 
 func (c awsConfig) Wait() {

@@ -22,30 +22,24 @@ type SessionOptions struct {
 
 type SessionOption func(*SessionOptions)
 
+func decrypt(s string) string {
+	if utils.IsEncryptedString(s) {
+		c, err := utils.DecryptStringBase64(config.App.Secret, s)
+		if err == nil {
+			return c
+		}
+	}
+	return s
+}
+
 func AccessKey(s string) SessionOption {
 	return func(opt *SessionOptions) {
-		if utils.IsEncryptedString(s) {
-			c, err := utils.DecryptStringBase64(config.App.Secret, s)
-			if err == nil {
-				opt.AccessKey = c
-				return
-			}
-			log.WithError(err).Error("unable to set encrypted access key")
-		}
-		opt.AccessKey = s
+		opt.AccessKey = decrypt(s)
 	}
 }
 func SecretKey(s string) SessionOption {
 	return func(opt *SessionOptions) {
-		if utils.IsEncryptedString(s) {
-			c, err := utils.DecryptStringBase64(config.App.Secret, s)
-			if err == nil {
-				opt.SecretKey = c
-				return
-			}
-			log.WithError(err).Error("unable to set encrypted secret key")
-		}
-		opt.SecretKey = s
+		opt.SecretKey = decrypt(s)
 	}
 }
 
