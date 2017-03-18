@@ -74,7 +74,7 @@ func Sts(data ...string) SessionOption {
 	}
 }
 
-func NewSession(opts ...SessionOption) (*session.Session, error) {
+func NewConfig(opts ...SessionOption) (*aws.Config, error) {
 	options := SessionOptions{
 		AccessKey:              Config.AccessKey,
 		SecretKey:              Config.SecretKey,
@@ -98,6 +98,15 @@ func NewSession(opts ...SessionOption) (*session.Session, error) {
 		DisableSSL:       aws.Bool(true),
 		S3ForcePathStyle: aws.Bool(true),
 		Logger:           log,
+	}
+
+	return awsconf, nil
+}
+
+func NewSession(opts ...SessionOption) (*session.Session, error) {
+	awsconf, err := NewConfig(opts...)
+	if err != nil {
+		return nil, err
 	}
 
 	sess, err := session.NewSession(awsconf)
