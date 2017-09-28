@@ -15,6 +15,7 @@ var (
 	log *logwrapper
 )
 
+// Log ...
 func (l *logwrapper) Log(args ...interface{}) {
 	log.Debug(args...)
 }

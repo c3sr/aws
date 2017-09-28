@@ -8,14 +8,17 @@ import (
 	"github.com/stretchr/testify/suite"
 )
 
+// SessionTestSuite ...
 type SessionTestSuite struct {
 	suite.Suite
 }
 
+// NewSessionTestSuite ...
 func NewSessionTestSuite() *SessionTestSuite {
 	return &SessionTestSuite{}
 }
 
+// TestSts ...
 func (suite *SessionTestSuite) TestSts() {
 	session, err := NewSession(
 		Region(AWSRegionUSEast1),
@@ -25,6 +28,7 @@ func (suite *SessionTestSuite) TestSts() {
 	assert.NotNil(suite.T(), session, "sesion must not be nil")
 }
 
+// TestSessionConfig ...
 func TestSessionConfig(t *testing.T) {
 	suite.Run(t, NewSessionTestSuite())
 }

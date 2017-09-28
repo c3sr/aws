@@ -8,6 +8,7 @@ import (
 	"github.com/rai-project/vipertags"
 )
 
+// AWSRegionUSEast1 ...
 const (
 	// AWSRegionUSEast1 is a helper constant for AWS configs.
 	AWSRegionUSEast1 = "us-east-1"
@@ -27,20 +28,24 @@ type awsConfig struct {
 	done                   chan struct{} `json:"-" config:"-"`
 }
 
+// Config ...
 var (
 	Config = &awsConfig{
 		done: make(chan struct{}),
 	}
 )
 
+// ConfigName ...
 func (awsConfig) ConfigName() string {
 	return "AWS"
 }
 
+// SetDefaults ...
 func (a *awsConfig) SetDefaults() {
 	vipertags.SetDefaults(a)
 }
 
+// Read ...
 func (a *awsConfig) Read() {
 	defer close(a.done)
 	vipertags.Fill(a)
@@ -49,14 +54,17 @@ func (a *awsConfig) Read() {
 	a.SessionToken = decrypt(a.SessionToken)
 }
 
+// Wait ...
 func (c awsConfig) Wait() {
 	<-c.done
 }
 
+// String ...
 func (c awsConfig) String() string {
 	return pp.Sprintln(c)
 }
 
+// Debug ...
 func (c awsConfig) Debug() {
 	log.Debug("AWS Config = ", c)
 }

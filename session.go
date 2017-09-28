@@ -12,6 +12,7 @@ import (
 	"github.com/rai-project/uuid"
 )
 
+// SessionOptions ...
 type SessionOptions struct {
 	AccessKey              string
 	SecretKey              string
@@ -20,6 +21,7 @@ type SessionOptions struct {
 	stsRoleDurationSeconds time.Duration
 }
 
+// SessionOption ...
 type SessionOption func(*SessionOptions)
 
 func decrypt(s string) string {
@@ -32,29 +34,35 @@ func decrypt(s string) string {
 	return s
 }
 
+// AccessKey ...
 func AccessKey(s string) SessionOption {
 	return func(opt *SessionOptions) {
 		opt.AccessKey = decrypt(s)
 	}
 }
+
+// SecretKey ...
 func SecretKey(s string) SessionOption {
 	return func(opt *SessionOptions) {
 		opt.SecretKey = decrypt(s)
 	}
 }
 
+// Region ...
 func Region(s string) SessionOption {
 	return func(opt *SessionOptions) {
 		opt.Region = s
 	}
 }
 
+// STSRoleDurationSeconds ...
 func STSRoleDurationSeconds(t time.Duration) SessionOption {
 	return func(opt *SessionOptions) {
 		opt.stsRoleDurationSeconds = t
 	}
 }
 
+// Sts ...
 func Sts(data ...string) SessionOption {
 	return func(opt *SessionOptions) {
 		roleSessionName := uuid.NewV4()
@@ -74,6 +82,7 @@ func Sts(data ...string) SessionOption {
 	}
 }
 
+// NewConfig ...
 func NewConfig(opts ...SessionOption) (*aws.Config, error) {
 	options := SessionOptions{
 		AccessKey:              Config.AccessKey,
@@ -103,6 +112,7 @@ func NewConfig(opts ...SessionOption) (*aws.Config, error) {
 	return awsconf, nil
 }
 
+// NewSession ...
 func NewSession(opts ...SessionOption) (*session.Session, error) {
 	awsconf, err := NewConfig(opts...)
 	if err != nil {
