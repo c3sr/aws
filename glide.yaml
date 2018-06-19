@@ -17,7 +17,6 @@ import:
 - package: github.com/rai-project/logger
 - package: github.com/rai-project/utils
 - package: github.com/rai-project/vipertags
-testImport:
 - package: github.com/stretchr/testify
   subpackages:
   - assert
