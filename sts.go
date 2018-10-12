@@ -26,6 +26,12 @@ func usingSTS(opts *SessionOptions, roleSessionName, account, role string) error
 		}},
 	}))
 
+	conf = conf.WithLogger(log)
+
+	if config.App.IsDebug {
+		conf = conf.WithLogLevel(aws.LogDebugWithHTTPBody | aws.LogDebugWithSigning)
+	}
+
 	sess := session.New()
 
 	svc := sts.New(sess, conf)
