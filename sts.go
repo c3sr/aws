@@ -26,10 +26,11 @@ func usingSTS(opts *SessionOptions, roleSessionName, account, role string) error
 		}},
 	}))
 
-	conf = conf.WithLogger(log)
-
-	if config.App.IsDebug {
-		conf = conf.WithLogLevel(aws.LogDebugWithHTTPBody | aws.LogDebugWithSigning)
+	if isDebug { // do not want random people looking at log info
+		conf = conf.WithLogger(log)
+		if config.App.IsDebug {
+			conf = conf.WithLogLevel(aws.LogDebugWithHTTPBody | aws.LogDebugWithSigning)
+		}
 	}
 
 	sess := session.New()
