@@ -7,9 +7,9 @@ import (
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/pkg/errors"
-	"github.com/rai-project/config"
-	"github.com/rai-project/utils"
-	"github.com/rai-project/uuid"
+	"github.com/c3sr/config"
+	"github.com/c3sr/utils"
+	"github.com/c3sr/uuid"
 )
 
 // SessionOptions ...

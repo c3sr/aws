@@ -1,3 +1,4 @@
+# aws [![Build Status](https://travis-ci.org/c3sr/aws.svg?branch=master)](https://travis-ci.org/c3sr/aws)
 
 ## Config File Example
 

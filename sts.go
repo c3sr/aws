@@ -8,7 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/sts"
-	"github.com/rai-project/config"
+	"github.com/c3sr/config"
 )
 
 func usingSTS(opts *SessionOptions, roleSessionName, account, role string) error {
