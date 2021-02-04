@@ -30,24 +30,24 @@
   version = "1.35.33"
 
 [[constraint]]
-  branch = "master"
   name = "github.com/c3sr/config"
+  version = "0.1.0"
 
 [[constraint]]
-  branch = "master"
   name = "github.com/c3sr/logger"
+  version = "0.1.0"
 
 [[constraint]]
-  branch = "master"
   name = "github.com/c3sr/utils"
+  version = "0.1.0"
 
 [[constraint]]
-  branch = "master"
   name = "github.com/c3sr/uuid"
+  version = "0.1.0"
 
 [[constraint]]
-  branch = "master"
   name = "github.com/c3sr/vipertags"
+  version = "0.1.0"
 
 [[constraint]]
   name = "github.com/k0kubun/pp"
